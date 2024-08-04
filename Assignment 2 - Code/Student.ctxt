@@ -1,3 +1,8 @@
 #BlueJ class context
 comment0.target=Student
-numComments=1
+comment1.params=name\ studentId\ assignment1\ assignment2\ assignment3
+comment1.target=Student(java.lang.String,\ java.lang.String,\ double,\ double,\ double)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Student\n
+comment2.params=
+comment2.target=Student()
+numComments=3

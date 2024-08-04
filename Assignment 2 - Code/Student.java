@@ -18,11 +18,30 @@ import java.util.ArrayList;
 import java.util.*;
 
 public class Student {
-    //Declaring student attributes: name, studentId, assignment1, assignment2,assignment3 and totalMarks as private
+    //Declare student attributes- name, studentId, assignment1, assignment2,assignment3 and totalMarks as private
     private String name;
     private String studentId;
     private double assignment1;
     private double assignment2;
     private double assignment3;
     private double totalMarks;
+
+/**
+* Constructor for objects of class Student
+*/
+
+    public Student(String name, String studentId, double assignment1, double assignment2, double assignment3) {
+        // Initialize student properties
+        this.name = name;
+        this.studentId = studentId;
+        this.assignment1 = assignment1;
+        this.assignment2 = assignment2;
+        this.assignment3 = assignment3;
+        this.totalMarks = assignment1 + assignment2 + assignment3;
+    }
+
+    public Student() {
+    }
 }
+
+
