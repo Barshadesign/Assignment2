@@ -26,6 +26,7 @@ public class Student {
     private double assignment3;
     private double totalMarks;
 
+    private static ArrayList<Student> studentList;
 /**
 * Constructor for objects of class Student
 */
@@ -41,6 +42,48 @@ public class Student {
     }
 
     public Student() {
+    }
+    
+    public static void getStudentDetails() {
+        try {
+            File file = new File("prog5001_students_grade_2022.csv");
+            Scanner scanner = new Scanner(file);
+            studentList = new ArrayList<>();
+
+            int lnNumber = 0;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                // Ignore two lines from first that has title and unit name
+                if (lnNumber < 2) {
+                    lnNumber++;
+                    continue;
+                }
+
+                // Extract student data 
+                String[] detail = line.split(","); //Split line into array
+                // Check line contain expected data fields
+                if (detail.length < 6) {
+                    System.out.println("Skipping line as there is data missing: " + line);
+                    continue;
+                }
+                // Extract and clean the student's data from columns
+                lName = detail[0].trim();
+                fName = detail[1].trim();
+                studentId = detail[2].trim();
+                assignment1 = detail[3].trim().isEmpty() ? 0 : Double.parseDouble(detail[3].trim());
+                assignment2 = detail[4].trim().isEmpty() ? 0 : Double.parseDouble(detail[4].trim());
+                assignment3 = detail[5].trim().isEmpty() ? 0 : Double.parseDouble(detail[5].trim());
+
+                // Create student object and add it to list
+                Student student = new Student(fName + " " + lName, studentId, assignment1, assignment2, assignment3);
+                studentList.add(student);
+            }
+            scanner.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
 
