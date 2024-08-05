@@ -5,4 +5,6 @@ comment1.target=Student(java.lang.String,\ java.lang.String,\ double,\ double,\ 
 comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Student\n
 comment2.params=
 comment2.target=Student()
-numComments=3
+comment3.params=
+comment3.target=void\ getStudentDetails()
+numComments=4
