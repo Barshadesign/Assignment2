@@ -27,9 +27,8 @@ public class Student {
     private double totalMarks;
 
     private static ArrayList<Student> studentList;
-/**
-* Constructor for objects of class Student
-*/
+    
+    // Constructor for objects of class Student
 
     public Student(String name, String studentId, double assignment1, double assignment2, double assignment3) {
         // Initialize student properties
@@ -86,6 +85,89 @@ public class Student {
             e.printStackTrace();
         }
     }
+    /** 
+     * method that allow access name, Id, assignment marks and total marks
+     */
+    public String getName() {
+        return name;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public double getAssignment1() {
+        return assignment1;
+    }
+
+    public double getAssignment2() {
+        return assignment2;
+    }
+
+    public double getAssignment3() {
+        return assignment3;
+    }
+
+    public double getTotalMarks() {
+        return totalMarks;
+    }
+    
+     /**
+      * methods that allow updating student's name, ID, and assignment marks. 
+      */
+     
+     public boolean setName(String name) {
+    if (name != null && !name.trim().isEmpty()) { //validate name input before making change
+            this.name = name;
+            return true;
+        }
+    return false;
+    }
+    
+    public boolean setStudentId(String studentId) {
+        if (studentId != null && !studentId.trim().isEmpty()) {//validate studentId input before making change
+            this.studentId = studentId;
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean setAssignment1(double assignment1) { 
+ // Ensure the mark is non-negative before updating
+    if (assignment1 >= 0) { 
+        this.assignment1 = assignment1;
+        updateTotalmark(); //total marks recalculate for accurate result
+        return true;
+    }
+    return false;
+}
+
+public boolean setAssignment2(double assignment2) { 
+ // Ensure the mark is non-negative before updating
+    if (assignment2 >= 0) { 
+        this.assignment2 = assignment2;
+        updateTotalmark(); //total marks recalculate for accurate result
+        return true;
+    }
+    return false;
+}
+
+public boolean setAssignment3(double assignment3) { 
+ // Ensure the mark is non-negative before updating
+    if (assignment3 >= 0) { 
+        this.assignment3 = assignment3;
+        //total marks recalculate for accurate result
+        updateTotalmark(); 
+        return true;
+    }
+    return false;
+}
+
+//Method to Recalculate total marks by adding all 3 marks from assignments
+private void updateTotalmark() {
+    this.totalMarks = this.assignment1 + this.assignment2 + this.assignment3;
+}
+
 }
 
 
