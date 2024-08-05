@@ -133,24 +133,24 @@ public class Student {
     }
     
     public boolean setAssignment1(double assignment1) { 
- // Ensure the mark is non-negative before updating
-    if (assignment1 >= 0) { 
+         // Ensure the mark is non-negative before updating
+        if (assignment1 >= 0) { 
         this.assignment1 = assignment1;
         updateTotalmark(); //total marks recalculate for accurate result
         return true;
+        }
+        return false;
     }
-    return false;
-}
-
-public boolean setAssignment2(double assignment2) { 
- // Ensure the mark is non-negative before updating
-    if (assignment2 >= 0) { 
-        this.assignment2 = assignment2;
-        updateTotalmark(); //total marks recalculate for accurate result
-        return true;
+    
+    public boolean setAssignment2(double assignment2) { 
+         // Ensure the mark is non-negative before updating
+        if (assignment2 >= 0) { 
+            this.assignment2 = assignment2;
+            updateTotalmark(); //total marks recalculate for accurate result
+            return true;
+        }
+        return false;
     }
-    return false;
-}
 
 public boolean setAssignment3(double assignment3) { 
  // Ensure the mark is non-negative before updating
@@ -163,11 +163,74 @@ public boolean setAssignment3(double assignment3) {
     return false;
 }
 
-//Method to Recalculate total marks by adding all 3 marks from assignments
-private void updateTotalmark() {
-    this.totalMarks = this.assignment1 + this.assignment2 + this.assignment3;
+    //Method to Recalculate total marks by adding all 3 marks from assignments
+    private void updateTotalmark() {
+        this.totalMarks = this.assignment1 + this.assignment2 + this.assignment3;
+    }
+   
+    
+// Return student detail   
+@Override
+public String toString() {
+    return "Student name= " + name + ", StudentID= " + studentId + 
+           ", Assignment1= " + assignment1 + ", Assignment2= " + assignment2 + 
+           ", Assignment3= " + assignment3 + 
+           ", Total Marks= " + totalMarks;
 }
+// Filtering student on basis of threshold provided
+    public static void filterThreshold() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Please provide threshold: ");
+        double markthreshold = scanner.nextDouble();
 
+        System.out.println("List of student with total mark less than threshold " + markthreshold);
+
+        boolean dataFound = false;
+        // Loop executing through each student
+        for (Student student : studentList) {
+
+            if (student.getTotalMarks() < markthreshold) {
+                System.out.println(student); // Print student detail if condition is met
+                dataFound = true;
+            }
+        }
+
+        if (!dataFound) {
+            System.out.println("No student with total marks less than " + markthreshold);
+        }
+    }
+
+    // Main method to run program
+    public static void main(String[] args) {
+        getStudentDetails();
+
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("1. View all marks of students");
+            System.out.println("2. Filter students below threshold");
+            System.out.print("Choose an option: ");
+            int choice = scanner.nextInt();
+
+           // Letting user choose for executing funtion
+        if (choice == 1) {
+            // display all students with marks
+            printAllStudents();
+        } else if (choice == 2) {
+            // Show student based on given threshold
+            filterThreshold();
+        } else {
+    
+            System.out.println("Please choose a valid option.");
+        }
+        }
+    }
+
+    // Method to print  students
+    public static void printAllStudents() {
+        for (Student student : studentList) {
+            System.out.println(student);
+        }
+    }
 }
 
 
