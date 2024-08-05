@@ -53,7 +53,6 @@ public class Student {
             int lnNumber = 0;
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-
                 // Ignore two lines from first which is title and unit name
                 if (lnNumber < 2) {
                     lnNumber++;
@@ -62,25 +61,20 @@ public class Student {
 
                 // Skip comment on the file
                 if (line.startsWith("#")) {
-                System.out.println("Skipping comment if any: " + line);
+                System.out.println("Skipping comment if there are any: " + line);
                 continue;
                 }
                 
                 // Extract student data 
                 String[] detail = line.split(","); //Split line into array
-                // Check line contain expected data fields
-                if (detail.length < 6) {
-                    System.out.println("Skipping line as there is data missing: " + line);
-                    continue;
-                }
-                // Extract and clean the student's data that are on each columns
+                // Extract and clean  student's data that are on each columns
                 String lName = detail[0].trim();
                 String fName = detail[1].trim();
                 String studnetId = detail[2].trim();
-                //Assign value of 0 if assignment mark is empty
-                double assignment1 = detail[3].trim().isEmpty() ? 0 : Double.parseDouble(detail[3].trim());
-                double assignment2 = detail[4].trim().isEmpty() ? 0 : Double.parseDouble(detail[4].trim());
-                double assignment3 = detail[5].trim().isEmpty() ? 0 : Double.parseDouble(detail[5].trim());
+                // Assign value of 0 if mark is empty for any assignment
+                double assignment1 = (detail.length > 3 && !detail[3].trim().isEmpty()) ? Double.parseDouble(detail[3].trim()) : 0;
+                double assignment2 = (detail.length > 4 && !detail[4].trim().isEmpty()) ? Double.parseDouble(detail[4].trim()) : 0;
+                double assignment3 = (detail.length > 5 && !detail[5].trim().isEmpty()) ? Double.parseDouble(detail[5].trim()) : 0;
 
                 // Create student object and add to list
                 Student student = new Student(fName + " " + lName, studnetId, assignment1, assignment2, assignment3);
