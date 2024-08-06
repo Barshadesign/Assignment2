@@ -42,16 +42,30 @@ public class Student {
 
     public Student() {
     }
-    
+    // Method to ask file as input from user
     public static void getStudentDetails() {
+        // Ask file name to user
         try {
-            File file = new File("prog5001_students_grade_2022.csv");
-            Scanner scanner = new Scanner(file);
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Provide the file name: ");
+            String fileName = scanner.nextLine();
+            // Finding file
+            File file = new File(fileName); 
+            if (!file.exists()) {
+            System.out.println("File not found: " + fileName);
+            return;  // If file not found, exit method
+            } 
+            
+            // File found confirm
+            System.out.println("Congratulations, " + fileName + " has been found. Reading file ... ");
+        
+            Scanner filescanner = new Scanner(file);
             studentList = new ArrayList<>();
 
             int lnNumber = 0;
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
+            // Reading file line by line
+            while (filescanner.hasNextLine()) {
+                String line = filescanner.nextLine();
                 // Ignore two lines from first which is title and unit name
                 if (lnNumber < 2) {
                     lnNumber++;
@@ -79,11 +93,14 @@ public class Student {
                 Student student = new Student(fName + " " + lName, studnetId, assignment1, assignment2, assignment3);
                 studentList.add(student);
             }
-            scanner.close();
+            filescanner.close();
+                    System.out.println("Above file has been read successfully.");
+
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        System.out.println("File not found. Check file name and try again.");
+        e.printStackTrace();  // locate error
+    }
     }
     /** 
      * method that allow access name, Id, assignment marks and total marks
@@ -189,8 +206,8 @@ public String toString() {
         // Loop executing through each student
         for (Student student : studentList) {
 
-            if (student.getTotalMarks() < markthreshold) {
-                System.out.println(student); // Print student detail if condition is met
+            if (student.getTotalMarks() < markthreshold) { //check if total mark is less than threshold
+                System.out.println(student); // Print student detail if condition is true
                 dataFound = true;
             }
         }
@@ -208,7 +225,7 @@ public String toString() {
         while (true) {
             System.out.println("1. View all marks of students");
             System.out.println("2. Filter students below threshold");
-            System.out.print("Choose an option: ");
+            System.out.print("Please choose option: ");
             int choice = scanner.nextInt();
 
            // Letting user choose for executing funtion
@@ -216,7 +233,7 @@ public String toString() {
             // display all students with marks
             printAllStudents();
         } else if (choice == 2) {
-            // Show student based on given threshold
+            //Show student based on given threshold
             filterThreshold();
         } else {
     
