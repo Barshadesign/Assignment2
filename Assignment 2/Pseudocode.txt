@@ -1,0 +1,18 @@
+Algorithm 3: Print students list with total mark less than a certain threshold given by user as input
+
+Function filterThreshold(studentList):
+Prompt user with "Please provide threshold:"
+Take input from user and store in markthreshold
+Print "List of students with total marks less than threshold " + markthreshold
+Initialize dataFound as false
+
+	For each student in studentList:
+		Get the students total marks using student.getTotalMarks()
+		If student.getTotalMarks() is less than markthreshold then:
+			Print the student's details
+			Set dataFound to true
+		End If
+	End For
+	If dataFound is false then:
+		Print "No student with total marks less than " + markthreshold
+End Function

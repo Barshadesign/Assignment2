@@ -215,6 +215,7 @@ public String toString() {
         if (!dataFound) {
             System.out.println("No student with total marks less than " + markthreshold);
         }
+        System.out.println("...................................................");
     }
 
     // Main method to run program
