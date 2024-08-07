@@ -72,11 +72,11 @@ public class Student {
       */
      
      public boolean setName(String name) {
-    if (name != null && !name.trim().isEmpty()) { // name input validate 
+        if (name != null && !name.trim().isEmpty()) { // name input validate 
             this.name = name;
             return true;
         }
-    return false;
+        return false;
     }
     
     public boolean setStudentId(String studentId) {
@@ -90,9 +90,9 @@ public class Student {
     public boolean setAssignment1(double assignment1) { 
          // Ensure mark is not less than 0
         if (assignment1 >= 0) { 
-        this.assignment1 = assignment1;
-        updateTotalmark(); //total mark recalculate for accurate result
-        return true;
+            this.assignment1 = assignment1;
+            updateTotalmark(); //total mark recalculate for accurate result
+            return true;
         }
         return false;
     }
@@ -107,16 +107,16 @@ public class Student {
         return false;
     }
 
-public boolean setAssignment3(double assignment3) { 
- // Ensure  mark is non-negative
-    if (assignment3 >= 0) { 
-        this.assignment3 = assignment3;
-        //recalculate total marks for accuracy
-        updateTotalmark(); 
-        return true;
+    public boolean setAssignment3(double assignment3) { 
+         // Ensure  mark is non-negative
+        if (assignment3 >= 0) { 
+            this.assignment3 = assignment3;
+            //recalculate total marks for accuracy
+            updateTotalmark(); 
+            return true;
+        }
+        return false;
     }
-    return false;
-}
 
     // Method to recalculate total marks
     private void updateTotalmark() {
@@ -131,11 +131,11 @@ public boolean setAssignment3(double assignment3) {
         return 
         
         "Student Name: " + name + "\n" +
-               "Student ID: " + studentId + "\n" +
-               "Assignment 1: " + assignment1 + "\n" +
-               "Assignment 2: " + assignment2 + "\n" +
-               "Assignment 3: " + assignment3 + "\n" + 
-               "Total Marks: " + totalMarks + "\n" ;
+        "Student ID: " + studentId + "\n" +
+        "Assignment 1: " + assignment1 + "\n" +
+        "Assignment 2: " + assignment2 + "\n" +
+        "Assignment 3: " + assignment3 + "\n" + 
+        "Total Marks: " + totalMarks + "\n" ;
 
     }
 
