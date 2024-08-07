@@ -1,23 +1,28 @@
 Algorithm 3: Print students list with total mark less than a certain threshold given by user as input
 
 Function filterThreshold:
-	Prompt user with "Please provide threshold:"
+	Prompt user with "Please provide threshold:" 
 	Take input from user and store in markthreshold
-	Print "List of students with total marks less than threshold " + markthreshold
-	Initialize dataFound as false
+	//Print message that clarify filtering process
+	Print "List of students with total marks less than threshold " + markthreshold 
+	//flag to trace if any students meet criteria
+	Initialize dataFound as false 
 
-	For each student in studentList Do:
+	For each student in studentList Do: // Loop through each student 
 		Get students total mark using student.getTotalMarks()
-		If student.getTotalMarks() < markthreshold then:
+		//Check if student's total marks is less than given threshold
+		If student.getTotalMarks() < markthreshold then: 
 			Print the student's details
-			Set dataFound to true
+			Set dataFound to true //Set flag to true as student met condition
 		End If
 	End For
 	If dataFound is false then:
-		Print "No student with total marks less than " + markthreshold
+		Print "No student with total marks less than " + markthreshold //Print no result found message
+
 	End If
 End Function
 
+-------------------------------------------------------------------------------
 
 Algorithm 4: Print top 5 students with highest and lowest total marks
 
@@ -25,9 +30,13 @@ Step 1: Bubble Sort Students by Total Marks
 
 Function: bubbleSortStudents;
 	Set n to size of studentList 
+	//Outer loop for the bubble sort algorithm
 	For i = 0 To n - 2 Do: 
+	// Inner loop to compare marks
 		For j = 0 TO n - i - 2 Do:
+		//Check if current student marks is greater than next student's marks
 			If studentList[j].getTotalMarks() > studentList[j+1].getTotalMarks() Then:
+				// Swap students if true
 				Set temp to studentList[j]
 				Set studentList[j] To studentList[j + 1]
 				Set studentList[j + 1] to temp
@@ -41,10 +50,11 @@ End Function
 Output: StudentList sorted in ascending order by totalMarks
 
 Step 2: Print Top 5 Students with highest and lowest marks
-
 Function: printTopBottomStudents:
+	//Call bubble sort function to sort student by total marks
 	CALL bubbleSortStudents()
 	Print "Top 5 Students with highest marks :".
+	//Loop through last 5 student in list sorted
 	For i = 0 to 4:
 		PRINT studentList[size of studentList - 1 - i]
 	End For
@@ -52,6 +62,7 @@ Function: printTopBottomStudents:
 Step 3: Print Bottom 5 Students with lowest marks
 
 	Print "Bottom 5 Students with lowest marks:".
+	//Loop through first 5 student in list sorted
 	For i = 0 to 4:
 		Print details of studentList[i].
 	End For
