@@ -4,12 +4,12 @@
  * This class is responsible for storing data about each student that 
  * includs their name, student IDs, and mark for three assignments and 
  * calculates total marks. This class also contain main method that allow 
- * program to read student data from given file, process it, and let user 
+ * program to read student data from file, process it, and let user 
  * interact by menu-driven interface. User can view all students' marks, 
  * filter students on the basis of threshold,and view the top 5 and 
  * bottom 5 students by their total marks.
  * Author: Barsha Dahal
- * Date: 4th August, 2024
+ * Date: 5th August, 2024
  */
 
 import java.io.*;
@@ -27,6 +27,7 @@ public class Student {
     private double totalMarks;
 
     private static ArrayList<Student> studentList;
+    private static boolean fileLoad = false; // Check if file has loaded
     
     // Constructor for objects of class Student
 
@@ -40,8 +41,10 @@ public class Student {
         this.totalMarks = assignment1 + assignment2 + assignment3;
     }
 
+    // Default constructor
     public Student() {
     }
+    
     // Method to ask file as input from user
     public static void getStudentDetails() {
         // Ask file name to user
@@ -94,7 +97,9 @@ public class Student {
                 studentList.add(student);
             }
             filescanner.close();
-                    System.out.println("Above file has been read successfully.");
+            System.out.println("Above file has been read successfully.");
+            fileLoaded = true; // Set fileLoaded to true after successful file load
+
 
 
         } catch (FileNotFoundException e) {
@@ -103,7 +108,7 @@ public class Student {
     }
     }
     /** 
-     * method that allow access name, Id, assignment marks and total marks
+     * method that allow access private student detail
      */
     public String getName() {
         return name;
@@ -173,27 +178,34 @@ public boolean setAssignment3(double assignment3) {
  // Ensure the mark is non-negative before updating
     if (assignment3 >= 0) { 
         this.assignment3 = assignment3;
-        //total marks recalculate for accurate result
+        //recalculate total marks for accuracy
         updateTotalmark(); 
         return true;
     }
     return false;
 }
 
-    //Method to Recalculate total marks by adding all 3 marks from assignments
+    // Method to recalculate total marks
     private void updateTotalmark() {
         this.totalMarks = this.assignment1 + this.assignment2 + this.assignment3;
     }
    
-    
-// Return student detail   
-@Override
-public String toString() {
-    return "Student name= " + name + ", StudentID= " + studentId + 
-           ", Assignment1= " + assignment1 + ", Assignment2= " + assignment2 + 
-           ", Assignment3= " + assignment3 + 
-           ", Total Marks= " + totalMarks;
+
+// Method to caary bubble sort on studentList
+public static void bubbleSortStudents() {
+    int n = studentList.size(); // Get number of students in list
+    for (int i = 0; i < n - 1; i++) { // outer loop to ensure we make multiple pass
+        for (int j = 0; j < n - i - 1; j++) {  // Inner loop to compare each student with next one 
+            if (studentList.get(j).getTotalMarks() > studentList.get(j + 1).getTotalMarks()) {
+                Student temp = studentList.get(j); // If student has more marks swap them 
+                studentList.set(j, studentList.get(j + 1));
+                studentList.set(j + 1, temp);
+            }
+        }
+    }
 }
+
+
 // Filtering student on basis of threshold provided
     public static void filterThreshold() {
         Scanner scanner = new Scanner(System.in);
@@ -218,14 +230,31 @@ public String toString() {
         System.out.println("...................................................");
     }
 
+    // Method to print top 5 and bottom 5 students
+public static void printTopBottom() {
+        // Sort student list in ascending order using bubble sort
+
+    bubbleSortStudents(); 
+    System.out.println("Top 5 Students with highest marks:"); // Print top 5 students with highest marks
+
+    for (int i = 0; i < 5; i++) {
+        System.out.println(studentList.get(studentList.size() - 1 - i)); // Display top 5 students from end of sorted list
+    }
+    // Print bottom 5 students
+    System.out.println("\nBottom 5 Students with lowest marks:"); // Print bottom 5 students with lowest marks
+    for (int i = 0; i < 5; i++) {
+        System.out.println(studentList.get(i)); // Display bottom 5 students from start of sorted list
+    }
+}
+
+
     // Main method to run program
     public static void main(String[] args) {
-        getStudentDetails();
-
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("1. View all marks of students");
             System.out.println("2. Filter students below threshold");
+            System.out.println("3. Print top 5 and bottom 5 students");
             System.out.print("Please choose option: ");
             int choice = scanner.nextInt();
 
@@ -236,7 +265,12 @@ public String toString() {
         } else if (choice == 2) {
             //Show student based on given threshold
             filterThreshold();
-        } else {
+        } else if (choice == 3) {
+                bubbleSortStudents(); 
+
+            printTopBottom();
+        } 
+        else {
     
             System.out.println("Please choose a valid option.");
         }
