@@ -271,42 +271,33 @@ public static void printTopBottom() {
             System.out.println("3. Filter student details below threshold");
             System.out.println("4. Print top 5 and bottom 5 students with details");
             System.out.println("5. Exit");
+            System.out.print("Enter choice: ");
             
             int choice = scanner.nextInt();
 
            // Implementing menu system for executing funtion
         if (choice == 1) {
                 getStudentDetails();
-            }
-            else if (choice == 2) {
+            } else if (choice >= 2 && choice <= 4) {
                 if (fileLoad) {
-                    printAllStudents();
+                    if (choice == 2) {
+                        printAllStudents();
+                    } else if (choice == 3) {
+                        filterThreshold();
+                    } else if (choice == 4) {
+                        printTopBottom();
+                    }
                 } else {
-                    System.out.println("Provide file before carrying any function");
+                    System.out.println("Please provide a file before carrying any function.");
                 }
-            } else if (choice == 3) {
-                if (fileLoad) {
-                    filterThreshold();
-                } else {
-                    System.out.println("Provide file before carrying any function");
-                }
-            }  
-            else if (choice == 4) {
-                if (fileLoad) {
-                    printTopBottom();
-                } else {
-                    System.out.println("Provide file before carrying any function");
-                }
-            }
-            else if (choice == 5) {
+            } else if (choice == 5) {
                 System.out.println("Exiting program...");
                 break;
             } else {
                 System.out.println("Please choose valid option.");
             }
-        }
-        catch (InputMismatchException e) {
-            System.out.println("Invalid input, enter number between 1 and 5.");
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input, enter a number between 1 and 5.");
             scanner.next(); 
         }
     }
