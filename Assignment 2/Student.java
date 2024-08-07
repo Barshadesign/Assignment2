@@ -15,6 +15,7 @@
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.*;
 
 public class Student {
@@ -98,7 +99,7 @@ public class Student {
             }
             filescanner.close();
             System.out.println("Above file has been read successfully.");
-            fileLoaded = true; // Set fileLoaded to true after successful file load
+            fileLoad = true; // Set fileLoaded to true after successful file load
 
 
 
@@ -191,6 +192,17 @@ public boolean setAssignment3(double assignment3) {
     }
    
 
+    // Method to return student details
+    @Override
+    public String toString() {
+        return "Student Name: " + name + 
+               ", Student ID: " + studentId + 
+               ", Assignment 1: " + assignment1 + 
+               ", Assignment 2: " + assignment2 + 
+               ", Assignment 3: " + assignment3 + 
+               ", Total Marks: " + totalMarks;
+    }
+
 // Method to caary bubble sort on studentList
 public static void bubbleSortStudents() {
     int n = studentList.size(); // Get number of students in list
@@ -219,7 +231,7 @@ public static void bubbleSortStudents() {
         for (Student student : studentList) {
 
             if (student.getTotalMarks() < markthreshold) { //check if total mark is less than threshold
-                System.out.println(student); // Print student detail if condition is true
+                System.out.println(student); // Print student detail if condition true
                 dataFound = true;
             }
         }
@@ -232,7 +244,7 @@ public static void bubbleSortStudents() {
 
     // Method to print top 5 and bottom 5 students
 public static void printTopBottom() {
-        // Sort student list in ascending order using bubble sort
+        // Sort student lst in ascending order using bubble sort
 
     bubbleSortStudents(); 
     System.out.println("Top 5 Students with highest marks:"); // Print top 5 students with highest marks
@@ -243,7 +255,7 @@ public static void printTopBottom() {
     // Print bottom 5 students
     System.out.println("\nBottom 5 Students with lowest marks:"); // Print bottom 5 students with lowest marks
     for (int i = 0; i < 5; i++) {
-        System.out.println(studentList.get(i)); // Display bottom 5 students from start of sorted list
+        System.out.println(studentList.get(i)); // Display bottom 5 student from start of sort list
     }
 }
 
@@ -252,29 +264,55 @@ public static void printTopBottom() {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("1. View all marks of students");
-            System.out.println("2. Filter students below threshold");
-            System.out.println("3. Print top 5 and bottom 5 students");
-            System.out.print("Please choose option: ");
+            try{
+            System.out.print("Please choose an option: ");
+            System.out.println("1. Provide file before carrying any function");
+            System.out.println("2. View total marks of students");
+            System.out.println("3. Filter student details below threshold");
+            System.out.println("4. Print top 5 and bottom 5 students with details");
+            System.out.println("5. Exit");
+            
             int choice = scanner.nextInt();
 
-           // Letting user choose for executing funtion
+           // Implementing menu system for executing funtion
         if (choice == 1) {
-            // display all students with marks
-            printAllStudents();
-        } else if (choice == 2) {
-            //Show student based on given threshold
-            filterThreshold();
-        } else if (choice == 3) {
-                bubbleSortStudents(); 
+                getStudentDetails();
+            }
+            else if (choice == 2) {
+                if (fileLoad) {
+                    printAllStudents();
+                } else {
+                    System.out.println("Provide file before carrying any function");
+                }
+            } else if (choice == 3) {
+                if (fileLoad) {
+                    filterThreshold();
+                } else {
+                    System.out.println("Provide file before carrying any function");
+                }
+            }  
+            else if (choice == 4) {
+                if (fileLoad) {
+                    printTopBottom();
+                } else {
+                    System.out.println("Provide file before carrying any function");
+                }
+            }
+            else if (choice == 5) {
+                System.out.println("Exiting program...");
+                break;
+            } else {
+                System.out.println("Please choose valid option.");
+            }
+        }
+        catch (InputMismatchException e) {
+            System.out.println("Invalid input, enter number between 1 and 5.");
+            scanner.next(); 
+        }
+    }
+                scanner.close();
 
-            printTopBottom();
-        } 
-        else {
-    
-            System.out.println("Please choose a valid option.");
-        }
-        }
+        
     }
 
     // Method to print  students
