@@ -195,12 +195,12 @@ public boolean setAssignment3(double assignment3) {
     // Method to return student details
     @Override
     public String toString() {
-        return "Student Name: " + name + 
-               ", Student ID: " + studentId + 
-               ", Assignment 1: " + assignment1 + 
-               ", Assignment 2: " + assignment2 + 
-               ", Assignment 3: " + assignment3 + 
-               ", Total Marks: " + totalMarks;
+        return "Student Name: " + name + "\n" +
+               "Student ID: " + studentId + "\n" +
+               "Assignment 1: " + assignment1 + "\n" +
+               "Assignment 2: " + assignment2 + "\n" +
+               "Assignment 3: " + assignment3 + "\n" + 
+               "Total Marks: " + totalMarks + "\n";
     }
 
 // Method to caary bubble sort on studentList
