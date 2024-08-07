@@ -33,7 +33,7 @@ public class Student {
     // Constructor for objects of class Student
 
     public Student(String name, String studentId, double assignment1, double assignment2, double assignment3) {
-        // Initialize student properties
+        // Initialize student property
         this.name = name;
         this.studentId = studentId;
         this.assignment1 = assignment1;
@@ -88,7 +88,7 @@ public class Student {
                 String lName = detail[0].trim();
                 String fName = detail[1].trim();
                 String studnetId = detail[2].trim();
-                // Assign value of 0 if mark is empty for any assignment
+                //Assign value of 0 if mark is empty for any assignment
                 double assignment1 = (detail.length > 3 && !detail[3].trim().isEmpty()) ? Double.parseDouble(detail[3].trim()) : 0;
                 double assignment2 = (detail.length > 4 && !detail[4].trim().isEmpty()) ? Double.parseDouble(detail[4].trim()) : 0;
                 double assignment3 = (detail.length > 5 && !detail[5].trim().isEmpty()) ? Double.parseDouble(detail[5].trim()) : 0;
@@ -99,7 +99,7 @@ public class Student {
             }
             filescanner.close();
             System.out.println("Above file has been read successfully.");
-            fileLoad = true; // Set fileLoaded to true after successful file load
+            fileLoad = true; // Set fileLoaded to true 
 
 
 
@@ -111,16 +111,17 @@ public class Student {
     /** 
      * method that allow access private student detail
      */
+    // Return student's name, id, assignment1, assignment2, assignment3 and total marks
     public String getName() {
-        return name;
+        return name; 
     }
 
     public String getStudentId() {
-        return studentId;
+        return studentId; 
     }
 
     public double getAssignment1() {
-        return assignment1;
+        return assignment1; 
     }
 
     public double getAssignment2() {
@@ -140,7 +141,7 @@ public class Student {
       */
      
      public boolean setName(String name) {
-    if (name != null && !name.trim().isEmpty()) { //validate name input before making change
+    if (name != null && !name.trim().isEmpty()) { // name input validate 
             this.name = name;
             return true;
         }
@@ -148,7 +149,7 @@ public class Student {
     }
     
     public boolean setStudentId(String studentId) {
-        if (studentId != null && !studentId.trim().isEmpty()) {//validate studentId input before making change
+        if (studentId != null && !studentId.trim().isEmpty()) {// Validate studentId input before making change
             this.studentId = studentId;
             return true;
         }
@@ -156,27 +157,27 @@ public class Student {
     }
     
     public boolean setAssignment1(double assignment1) { 
-         // Ensure the mark is non-negative before updating
+         // Ensure mark is not less than 0
         if (assignment1 >= 0) { 
         this.assignment1 = assignment1;
-        updateTotalmark(); //total marks recalculate for accurate result
+        updateTotalmark(); //total mark recalculate for accurate result
         return true;
         }
         return false;
     }
     
     public boolean setAssignment2(double assignment2) { 
-         // Ensure the mark is non-negative before updating
+         // Ensure the mark is less than 0
         if (assignment2 >= 0) { 
             this.assignment2 = assignment2;
-            updateTotalmark(); //total marks recalculate for accurate result
+            updateTotalmark(); //total marks recalculate for accuracy
             return true;
         }
         return false;
     }
 
 public boolean setAssignment3(double assignment3) { 
- // Ensure the mark is non-negative before updating
+ // Ensure  mark is non-negative
     if (assignment3 >= 0) { 
         this.assignment3 = assignment3;
         //recalculate total marks for accuracy
@@ -195,21 +196,25 @@ public boolean setAssignment3(double assignment3) {
     // Method to return student details
     @Override
     public String toString() {
-        return "Student Name: " + name + "\n" +
+        //Print each student detail in new line
+        return 
+        
+        "Student Name: " + name + "\n" +
                "Student ID: " + studentId + "\n" +
                "Assignment 1: " + assignment1 + "\n" +
                "Assignment 2: " + assignment2 + "\n" +
                "Assignment 3: " + assignment3 + "\n" + 
-               "Total Marks: " + totalMarks + "\n";
+               "Total Marks: " + totalMarks + "\n" ;
+
     }
 
 // Method to caary bubble sort on studentList
 public static void bubbleSortStudents() {
     int n = studentList.size(); // Get number of students in list
-    for (int i = 0; i < n - 1; i++) { // outer loop to ensure we make multiple pass
-        for (int j = 0; j < n - i - 1; j++) {  // Inner loop to compare each student with next one 
+    for (int i = 0; i < n - 1; i++) { // outer loop to ensure multiple pass
+        for (int j = 0; j < n - i - 1; j++) {  // Inner loop to compare each student with next 
             if (studentList.get(j).getTotalMarks() > studentList.get(j + 1).getTotalMarks()) {
-                Student temp = studentList.get(j); // If student has more marks swap them 
+                Student temp = studentList.get(j); // If student is greater swap them 
                 studentList.set(j, studentList.get(j + 1));
                 studentList.set(j + 1, temp);
             }
@@ -218,7 +223,7 @@ public static void bubbleSortStudents() {
 }
 
 
-// Filtering student on basis of threshold provided
+// Filtering student on basis of threshold 
     public static void filterThreshold() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Please provide threshold: ");
@@ -232,6 +237,7 @@ public static void bubbleSortStudents() {
 
             if (student.getTotalMarks() < markthreshold) { //check if total mark is less than threshold
                 System.out.println(student); // Print student detail if condition true
+
                 dataFound = true;
             }
         }
@@ -239,32 +245,32 @@ public static void bubbleSortStudents() {
         if (!dataFound) {
             System.out.println("No student with total marks less than " + markthreshold);
         }
-        System.out.println("...................................................");
     }
 
     // Method to print top 5 and bottom 5 students
 public static void printTopBottom() {
-        // Sort student lst in ascending order using bubble sort
-
+    // Sort student list in ascending order,use bubble sort
     bubbleSortStudents(); 
-    System.out.println("Top 5 Students with highest marks:"); // Print top 5 students with highest marks
 
+    System.out.println("Top 5 Students with highest marks:"); // Print top 5 students with highest marks
     for (int i = 0; i < 5; i++) {
         System.out.println(studentList.get(studentList.size() - 1 - i)); // Display top 5 students from end of sorted list
     }
-    // Print bottom 5 students
     System.out.println("\nBottom 5 Students with lowest marks:"); // Print bottom 5 students with lowest marks
     for (int i = 0; i < 5; i++) {
         System.out.println(studentList.get(i)); // Display bottom 5 student from start of sort list
     }
+   
 }
 
 
     // Main method to run program
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        //  Infinite loop for menu interface
         while (true) {
             try{
+                // Showing menu options to users
             System.out.print("Please choose an option: ");
             System.out.println("1. Provide file before carrying any function");
             System.out.println("2. View total marks of students");
@@ -275,41 +281,58 @@ public static void printTopBottom() {
             
             int choice = scanner.nextInt();
 
-           // Implementing menu system for executing funtion
-        if (choice == 1) {
+           
+      // Implementing menu system for executing funtion based on choice
+
+        if (choice == 1) { // User chooses to provide file
                 getStudentDetails();
             } else if (choice >= 2 && choice <= 4) {
+                // Ensure if file is loaded before processing with other option
                 if (fileLoad) {
                     if (choice == 2) {
+                        // option to view total marks of students
                         printAllStudents();
                     } else if (choice == 3) {
+                        // Option to filter students based on threshold
                         filterThreshold();
                     } else if (choice == 4) {
+                        // Option to print top 5 and bottom 5 
                         printTopBottom();
                     }
                 } else {
+                    // Warning user if they proceed without loading  file 
+
                     System.out.println("Please provide a file before carrying any function.");
                 }
             } else if (choice == 5) {
                 System.out.println("Exiting program...");
+                 scanner.close(); // Close scanner before exiting
+                 System.exit(0); // Exit program
+
                 break;
             } else {
-                System.out.println("Please choose valid option.");
+                // Notify user if they enter invalid value
+                System.out.println("Choose valid option, a number between 1 and 5.");
             }
         } catch (InputMismatchException e) {
+            // Notify user input if they inout valid integer
             System.out.println("Invalid input, enter a number between 1 and 5.");
             scanner.next(); 
         }
+        // Add divider after each operation for better readability
+        System.out.println("=====================================================");
     }
-                scanner.close();
+    scanner.close();
 
         
     }
 
-    // Method to print  students
+    // Method to print  students details
     public static void printAllStudents() {
+        // Loop through each student
         for (Student student : studentList) {
-            System.out.println(student);
+            System.out.println(student);// Display student information 
+
         }
     }
 }
