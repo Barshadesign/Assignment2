@@ -28,7 +28,7 @@ Algorithm 4: Print top 5 students with highest and lowest total marks
 
 Step 1: Bubble Sort Students by Total Marks
 
-Function: bubbleSortStudents;
+Function bubbleSortStudents:
 	Set n to size of studentList 
 	//Outer loop for the bubble sort algorithm
 	For i = 0 To n - 2 Do: 
@@ -50,7 +50,7 @@ End Function
 Output: StudentList sorted in ascending order by totalMarks
 
 Step 2: Print Top 5 Students with highest and lowest marks
-Function: printTopBottomStudents:
+Function printTopBottomStudents:
 	//Call bubble sort function to sort student by total marks
 	CALL bubbleSortStudents()
 	Print "Top 5 Students with highest marks :".
