@@ -1,18 +1,60 @@
 Algorithm 3: Print students list with total mark less than a certain threshold given by user as input
 
-Function filterThreshold(studentList):
-Prompt user with "Please provide threshold:"
-Take input from user and store in markthreshold
-Print "List of students with total marks less than threshold " + markthreshold
-Initialize dataFound as false
+Function filterThreshold:
+	Prompt user with "Please provide threshold:"
+	Take input from user and store in markthreshold
+	Print "List of students with total marks less than threshold " + markthreshold
+	Initialize dataFound as false
 
-	For each student in studentList:
-		Get the students total marks using student.getTotalMarks()
-		If student.getTotalMarks() is less than markthreshold then:
+	For each student in studentList Do:
+		Get students total mark using student.getTotalMarks()
+		If student.getTotalMarks() < markthreshold then:
 			Print the student's details
 			Set dataFound to true
 		End If
 	End For
 	If dataFound is false then:
 		Print "No student with total marks less than " + markthreshold
+	End If
 End Function
+
+
+Algorithm 4: Print top 5 students with highest and lowest total marks
+
+Step 1: Bubble Sort Students by Total Marks
+
+Function: bubbleSortStudents;
+	Set n to size of studentList 
+	For i = 0 To n - 2 Do: 
+		For j = 0 TO n - i - 2 Do:
+			If studentList[j].getTotalMarks() > studentList[j+1].getTotalMarks() Then:
+				Set temp to studentList[j]
+				Set studentList[j] To studentList[j + 1]
+				Set studentList[j + 1] to temp
+			End If
+		End For
+	End For
+End Function
+
+		
+
+Output: StudentList sorted in ascending order by totalMarks
+
+Step 2: Print Top 5 Students with highest and lowest marks
+
+Function: printTopBottomStudents:
+	CALL bubbleSortStudents()
+	Print "Top 5 Students with highest marks :".
+	For i = 0 to 4:
+		PRINT studentList[size of studentList - 1 - i]
+	End For
+
+Step 3: Print Bottom 5 Students with lowest marks
+
+	Print "Bottom 5 Students with lowest marks:".
+	For i = 0 to 4:
+		Print details of studentList[i].
+	End For
+End Function
+
+
